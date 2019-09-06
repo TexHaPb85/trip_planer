@@ -20,11 +20,11 @@ public class Tour {
     @ElementCollection(targetClass = User.class)
     private List<User> users = new ArrayList<>();
 
-    @Column(name = "places")
-    @ElementCollection(targetClass = Place.class)
+    @Column(name = "tourPlaces")
+    @ElementCollection(targetClass = TourPlace.class)
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "place_tour", joinColumns = @JoinColumn(name = "tour_id"), inverseJoinColumns = @JoinColumn(name = "place_id"))
-    private List<Place> places = new ArrayList<>();
+    private List<TourPlace> tourPlaces = new ArrayList<>();
 
     public Tour() {
     }
@@ -49,15 +49,15 @@ public class Tour {
         return users;
     }
 
-    public List<Place> getPlaces() {
-        return places;
+    public List<TourPlace> getTourPlaces() {
+        return tourPlaces;
     }
 
     public void setUsers(List<User> users) {
         this.users = users;
     }
 
-    public void setPlaces(List<Place> places) {
-        this.places = places;
+    public void setTourPlaces(List<TourPlace> tourPlaces) {
+        this.tourPlaces = tourPlaces;
     }
 }

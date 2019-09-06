@@ -3,9 +3,10 @@ package edu.practise.trip_planner.entities;
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
 @Table(name = "places")
-public class Place {
+public class TourPlace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "place_Id")
@@ -15,14 +16,16 @@ public class Place {
     private String name;
 
     @Column(name = "comments")
+    @OneToMany(cascade = CascadeType.ALL)
     @ElementCollection(targetClass = String.class)
-    private List<String> comments;
+    @JoinTable(name = "comments", joinColumns = @JoinColumn(name = "comment_Id"))
+    private List<Comment> comments;
 
     @Column(name = "rates")
     @ElementCollection(targetClass = Float.class)
     private List<Float> rates;
 
-    public Place(String name, List<String> comments, List<Float> rates) {
+    public TourPlace(String name, List<Comment> comments, List<Float> rates) {
         this.name = name;
         this.comments = comments;
         this.rates = rates;
@@ -44,11 +47,11 @@ public class Place {
         this.name = name;
     }
 
-    public List<String> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
@@ -58,15 +61,5 @@ public class Place {
 
     public void setRates(List<Float> rates) {
         this.rates = rates;
-    }
-
-    @Override
-    public String toString() {
-        return "Place{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", comments=" + comments +
-                ", rates=" + rates +
-                '}';
     }
 }

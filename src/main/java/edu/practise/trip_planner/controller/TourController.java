@@ -5,10 +5,10 @@ import edu.practise.trip_planner.entities.Tour;
 import edu.practise.trip_planner.service.tour.TourServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("tours")
 public class TourController {
     private final TourServiceImpl tourService;
 
@@ -41,10 +41,10 @@ public class TourController {
     }
 
     @PatchMapping("/{userId}/trip/{tripId}")
-    public ResponseEntity shareTripWhitOtherUser(@PathVariable("userId") Long userId, @PathVariable("tripId") Long tripId){
+    public ResponseEntity shareTripWhitOtherUser(@PathVariable("userId") Long userId, @PathVariable("tripId") Long tripId) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(tourService.shareTourWithOtherUser(tripId,userId));
+                .body(tourService.shareTourWithOtherUser(tripId, userId));
     }
 
     @GetMapping("/trip/{id}")
@@ -55,7 +55,7 @@ public class TourController {
     }
 
     @GetMapping("/trip")
-    public ResponseEntity showAllTrip(){
+    public ResponseEntity showAllTrip() {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(tourService.findAllTours());

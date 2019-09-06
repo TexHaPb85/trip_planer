@@ -1,14 +1,14 @@
 package edu.practise.trip_planner.controller;
 
 
-import edu.practise.trip_planner.entities.Place;
+import edu.practise.trip_planner.entities.TourPlace;
 import edu.practise.trip_planner.service.place.PlaceServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("places")
 public class PlaceController {
     private final PlaceServiceImpl placeService;
 
@@ -16,15 +16,15 @@ public class PlaceController {
         this.placeService = placeService;
     }
 
-    @PostMapping("/place")
+    @PostMapping
     @ResponseBody
-    public ResponseEntity addPlace(@RequestBody Place place){
+    public ResponseEntity addPlace(@RequestBody TourPlace tourPlace){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(placeService.addPlace(place));
+                .body(placeService.addPlace(tourPlace));
     }
 
-    @DeleteMapping("/place/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity deletePlaceById(@PathVariable("id") Long id ){
         placeService.deletePlaceById(id);
         return ResponseEntity
@@ -32,18 +32,18 @@ public class PlaceController {
                 .body("The place deleted");
     }
 
-    @GetMapping("/place/{id}")
-    public ResponseEntity<Place> findPlaceById(@PathVariable("id") Long id){
+    @GetMapping("{id}")
+    public ResponseEntity<TourPlace> findPlaceById(@PathVariable("id") Long id){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(placeService.findPlaceById(id));
     }
 
-    @PutMapping("/place/{id}")
+    @PutMapping("{id}")
     @ResponseBody
-    public ResponseEntity editPlaceById(@PathVariable("id") Long id, @RequestBody Place place){
+    public ResponseEntity editPlaceById(@PathVariable("id") Long id, @RequestBody TourPlace tourPlace){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("The place edited" + placeService.editPlaceById(id, place));
+                .body("The tourPlace edited" + placeService.editPlaceById(id, tourPlace));
     }
 }

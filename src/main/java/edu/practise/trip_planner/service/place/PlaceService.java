@@ -1,14 +1,14 @@
 package edu.practise.trip_planner.service.place;
 
 
-import edu.practise.trip_planner.entities.Place;
+import edu.practise.trip_planner.entities.TourPlace;
 
 public interface PlaceService {
-    Place addPlace(Place place);
+    TourPlace addPlace(TourPlace tourPlace);
 
     void deletePlaceById(Long id);
 
-    Place findPlaceById(Long id);
+    TourPlace findPlaceById(Long id);
 
-    Place editPlaceById(Long id, Place place);
+    TourPlace editPlaceById(Long id, TourPlace tourPlace);
 }
