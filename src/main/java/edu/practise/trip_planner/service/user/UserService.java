@@ -1,11 +1,14 @@
 package edu.practise.trip_planner.service.user;
 
+import edu.practise.trip_planner.entities.Tour;
 import edu.practise.trip_planner.entities.User;
 
 import java.util.List;
 
 public interface UserService {
-    User saveUser(User user);
+    User addTourToUser(Long userId, Tour tour);
+
+    User addUser(User user);
 
     User getUserById(Long id);
 
@@ -13,5 +16,5 @@ public interface UserService {
 
     void deleteUserById(Long id);
 
-    User updateUser(Long id, User user);
+    User editUser(Long id, User user);
 }

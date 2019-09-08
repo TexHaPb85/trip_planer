@@ -13,6 +13,10 @@ public class Comment {
     @Column(name = "text_of_comment")
     private String text;
 
+    @ManyToOne
+    @JoinColumn(name = "place_Id")
+    private TourPlace place;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private User author;
@@ -42,5 +46,13 @@ public class Comment {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public TourPlace getPlace() {
+        return place;
+    }
+
+    public void setPlace(TourPlace place) {
+        this.place = place;
     }
 }

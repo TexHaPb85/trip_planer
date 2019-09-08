@@ -15,19 +15,15 @@ public class TourPlace {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "comments")
-    @OneToMany(cascade = CascadeType.ALL)
-    @ElementCollection(targetClass = String.class)
-    @JoinTable(name = "comments", joinColumns = @JoinColumn(name = "comment_Id"))
-    private List<Comment> comments;
-
     @Column(name = "rates")
     @ElementCollection(targetClass = Float.class)
     private List<Float> rates;
 
-    public TourPlace(String name, List<Comment> comments, List<Float> rates) {
+    public TourPlace() {
+    }
+
+    public TourPlace(String name, List<Float> rates) {
         this.name = name;
-        this.comments = comments;
         this.rates = rates;
     }
 
@@ -45,14 +41,6 @@ public class TourPlace {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     public List<Float> getRates() {

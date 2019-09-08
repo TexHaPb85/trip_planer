@@ -1,11 +1,14 @@
 package edu.practise.trip_planner.controller;
 
 
+import edu.practise.trip_planner.entities.Comment;
 import edu.practise.trip_planner.entities.TourPlace;
 import edu.practise.trip_planner.service.place.PlaceServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("places")
@@ -14,6 +17,11 @@ public class PlaceController {
 
     public PlaceController(PlaceServiceImpl placeService) {
         this.placeService = placeService;
+    }
+
+    @GetMapping
+    public List<TourPlace> findAllPlaces(){
+        return placeService.findAllPlaces();
     }
 
     @PostMapping
@@ -46,4 +54,20 @@ public class PlaceController {
                 .status(HttpStatus.OK)
                 .body("The tourPlace edited" + placeService.editPlaceById(id, tourPlace));
     }
+
+    @PostMapping("{id}/comments")
+    public ResponseEntity addCommentAboutPlace(@PathVariable("id") Long placeID, @RequestBody Comment comment){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(placeService.addCommentToPlace(placeID,comment));
+    }
+
+    @GetMapping("{id}/comments")
+    public ResponseEntity getCommentsById(@PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(placeService.findCommentsByPlaceId(id));
+    }
+
+
 }

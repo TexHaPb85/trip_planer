@@ -28,6 +28,10 @@ public class User {
     public User() {
     }
 
+    public void addTour(Tour tour) {
+        tours.add(tour);
+    }
+
     public Long getId() {
         return id;
     }

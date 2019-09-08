@@ -26,6 +26,14 @@ public class Tour {
     @JoinTable(name = "place_tour", joinColumns = @JoinColumn(name = "tour_id"), inverseJoinColumns = @JoinColumn(name = "place_id"))
     private List<TourPlace> tourPlaces = new ArrayList<>();
 
+    public void addUser(User user){
+        users.add(user);
+    }
+
+    public void addPlace(TourPlace place){
+        tourPlaces.add(place);
+    }
+
     public Tour() {
     }
 

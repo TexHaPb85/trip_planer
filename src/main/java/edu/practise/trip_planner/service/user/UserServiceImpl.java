@@ -1,6 +1,7 @@
 package edu.practise.trip_planner.service.user;
 
 
+import edu.practise.trip_planner.entities.Tour;
 import edu.practise.trip_planner.entities.User;
 import edu.practise.trip_planner.exceptions.UserNotFoundException;
 import edu.practise.trip_planner.repository.UserRepository;
@@ -17,8 +18,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
-       return userRepository.save(user);
+    public User addTourToUser(Long userId, Tour tour) {
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("The user with id " + userId + " doesn't found"));
+        user.addTour(tour);
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User addUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
@@ -39,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long id, User user) {
+    public User editUser(Long id, User user) {
         User existedUser = userRepository
                 .findById(id)
                 .orElseThrow(() -> new UserNotFoundException("The user with id " + id + " doesn't found"));
