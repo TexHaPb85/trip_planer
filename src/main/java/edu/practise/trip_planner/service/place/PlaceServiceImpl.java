@@ -9,6 +9,7 @@ import edu.practise.trip_planner.repository.PlaceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlaceServiceImpl implements PlaceService {
@@ -55,10 +56,14 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public TourPlace findPlaceById(Long id) {
+    public TourPlace getPlaceById(Long id) {
         return placeRepository
                 .findById(id)
                 .orElseThrow(() -> new PlaceNotFoundException("The place with id " + id + " doesn't found"));
+    }
+
+    public Optional<TourPlace> findPlaceById(Long id) {
+        return placeRepository.findById(id);
     }
 
     @Override

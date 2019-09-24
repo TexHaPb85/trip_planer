@@ -8,6 +8,7 @@ import edu.practise.trip_planner.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,6 +38,10 @@ public class UserServiceImpl implements UserService {
         return userRepository
                 .findById(id)
                 .orElseThrow(() -> new UserNotFoundException("The user with id " + id + " doesn't found"));
+    }
+
+    public Optional<User> findById(Long id){
+        return  userRepository.findById(id);
     }
 
     @Override

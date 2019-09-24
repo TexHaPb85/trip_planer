@@ -56,14 +56,14 @@ public class TourController {
                 .body(tourService.editTourById(id, tour));
     }
 
-    @PatchMapping("{tourId}/addUser")
+    @PatchMapping("{tourId}/userRegistration")
     public ResponseEntity addUserToTour(@PathVariable("tourId") Long tourId, @RequestBody User user) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(tourService.addUserToTour(tourId,user));
     }
 
-    @PatchMapping("{tourId}/addPlace")
+    @PatchMapping("{tourId}/placeRegistration")
     public ResponseEntity addPlaceToTour(@PathVariable("tourId") Long tourId, @RequestBody TourPlace place){
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -71,10 +71,10 @@ public class TourController {
     }
 
 
-    @PatchMapping("add/{userId}/userTo/{tripId}")
-    public ResponseEntity shareTripWhitOtherUser(@PathVariable("userId") Long userId, @PathVariable("tripId") Long tripId) {
+    @PatchMapping("{tourId}/share")
+    public ResponseEntity shareTourWhitOtherUser(@RequestParam("userId") Long userId, @PathVariable("tourId") Long tourId) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(tourService.shareTourWithOtherUser(tripId, userId));
+                .body(tourService.shareTourWithOtherUser(tourId, userId));
     }
 }

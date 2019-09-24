@@ -19,7 +19,7 @@ public interface PlaceService {
 
     void deletePlaceById(Long id);
 
-    TourPlace findPlaceById(Long id);
+    TourPlace getPlaceById(Long id);
 
     TourPlace editPlaceById(Long id, TourPlace tourPlace);
 }

@@ -53,7 +53,7 @@ public class UserController {
                 .body("User " + userService.editUser(id, user) + " updated successfully");
     }
 
-    @PatchMapping("{id}/addTour")
+    @PatchMapping("{id}/tourRegistration")
     public ResponseEntity addTourToUser(@PathVariable("id") Long id, @RequestBody Tour tour) {
         return ResponseEntity
                 .status(HttpStatus.OK)
